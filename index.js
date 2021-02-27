@@ -91,7 +91,6 @@ client.on('message', message => {
 	}
 
 	var member = message.mentions.users.first() || message.author;
-	let bad = require('./bad.json')
 	db.fetch(`warn_${member.id}_${message.guild.id}`)
 db.fetch(`chat_${member.id}_${message.guild.id}`)
 db.fetch(`xp_${member.id}_${message.guild.id}`)
