@@ -19,7 +19,7 @@ for (const folder of commandFolders) {
 const cooldowns = new Discord.Collection();
 client.once('ready', () => {
 	const activities_list = [
-		"ขอคำสั่ง เพื่อแสดงคำสั่ง", 
+		"sm!คำสั่ง เพื่อแสดงคำสั่ง", 
 		`บอตถูกใช้ใน ${client.guilds.cache.size} เซอร์เวอร์!`,
 		"กับคุณ", 
 		"Half-life 3"
