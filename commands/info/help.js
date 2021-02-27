@@ -7,8 +7,7 @@ module.exports = {
     description: 'ดูคำสั่งทั้งหมด',
     execute(message, args) {
       if(!args.length) {
-		message.channel.send("เวอร์ชั่น : 1.2.0: ภาษาไืทย")
-		message.channel.send("โดย THE ONE CLASSROOM; http://docs-toc.web.app/#join-my-server")
+		message.channel.send("คุณสามารถพิมพ์ sm!คำสั่ง + คำสั่ง เพื่อได้ข้อมูลคำสั่งของคำสั่ง")
     message.channel.send("ผู้สร้าง : `มีปัญหาหรอ#1424`")
     const embed = new MessageEmbed()
     .setTitle("คำสั่งบอต")
