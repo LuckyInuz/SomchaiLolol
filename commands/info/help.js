@@ -23,7 +23,7 @@ module.exports = {
     .setDescription("—————————————————————————————")
     message.channel.send(embed)
       }
-    if(args = "วัน" && "อาทิตย์" && "เดือน") {
+    else if(args = "วัน" && "อาทิตย์" && "เดือน") {
       message.channel.send("ได้รับเงินประจำวัน สัปดาห์ หรือเดือน ตามลำดับ")
       message.channel.send("วิธีใช้ : พิมพ์คำสั่งได้เลย!")
       message.channel.send("อาร์กิวเมนต์ : ไม่")
