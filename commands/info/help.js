@@ -5,9 +5,12 @@ module.exports = {
     name: 'คำสั่ง',
     aliases: ['คอมมานต์'],
     description: 'ดูคำสั่งทั้งหมด',
-    execute(message, args) {
+    cooldown: 3,
+    args: false,
+    usage: "<ชื่อคำสั่งที่ต้องการ>",
+    execute(client, message, args) {
       if(!args.length) {
-		message.channel.send("เวอร์ชั่น : 1.2.0: ภาษาไืทย")
+		message.channel.send("เวอร์ชั่น : 1.3.0")
 		message.channel.send("โดย THE ONE CLASSROOM; http://docs-toc.web.app/#join-my-server")
     message.channel.send("ผู้สร้าง : `มีปัญหาหรอ#1424`")
     const embed = new MessageEmbed()
@@ -23,82 +26,26 @@ module.exports = {
     .setDescription("—————————————————————————————")
     message.channel.send(embed)
       }
-    else if(args = "วัน" && "อาทิตย์" && "เดือน") {
-      message.channel.send("ได้รับเงินประจำวัน สัปดาห์ หรือเดือน ตามลำดับ")
-      message.channel.send("วิธีใช้ : พิมพ์คำสั่งได้เลย!")
-      message.channel.send("อาร์กิวเมนต์ : ไม่")
-    } else if(args = "เป๋า") {
-      message.channel.send("ตรวจสอบยอดเงินคงเหลือ")
-      message.channel.send("วิธีใช้ : พิมพ์คำสั่งได้เลย! / แท็กผู้ใช้คนใดคนหนึ่ง")
-      message.channel.send("อาร์กิวเมนต์ : ใช่")
-    } else    if(args = "ถอน" && "ฝาก") {
-      message.channel.send("ถอนหรือฝากเงิน")
-      message.channel.send("วิธีใช้ : คำสั่ง + จำนวนเงิน")
-      message.channel.send("อาร์กิวเมนต์ : ใข่")
-    } else    if(args = "สุ่ม") {
-      message.channel.send("สุ่มทายเลข 1-10 ทายถูกได้จำนวนเงินพนัน * 3 แพ้ * 2")
-      message.channel.send("วิธีใช้ : คำสั่ง + จำนวนเงิน + เลข")
-      message.channel.send("อาร์กิวเมนต์ : ใช่")
-    } else    if(args = "อันดับเงิน") {
-      message.channel.send("แสดงผู้คนที่เงินเยอะสุด")
-      message.channel.send("วิธีใช้ : พิมพ์คำสั่งได้เลย!")
-      message.channel.send("อาร์กิวเมนต์ : ไม่")
-     } else if(args = "เตะ") {
-      message.channel.send("เตะผู้ใช้")
-      message.channel.send("วิธีใช้ : คำสั่ง + ผู้ใช้")
-      message.channel.send("อาร์กิวเมนต์ : ใช่")
-    } else if(args = "แบน") {
-      message.channel.send("แบนผู้ใช้")
-      message.channel.send("วิธีใช้ : คำสั่ง + ผู้ใช้")
-      message.channel.send("อาร์กิวเมนต์ : ใช่")
-    } else  if(args = "เตะ") {
-      message.channel.send("พูด")
-      message.channel.send("วิธีใช้ : คำสั่ง + คำพูด")
-      message.channel.send("อาร์กิวเมนต์ : ใช่")
-    } else if(args = "หล่อ") {
-      message.channel.send("ความหล่อของผู้ใช้")
-      message.channel.send("วิธีใช้ : พิมพ์คำสั่งได้เลย / คำสั่ง + ผู้ใช้")
-      message.channel.send("อาร์กิวเมนต์ : ใช่")
-    } else if(args = "รัก") {
-      message.channel.send("รักผู้ใช้")
-      message.channel.send("วิธีใช้ : คำสั่ง + ผู้ใช้")
-      message.channel.send("อาร์กิวเมนต์ : ใช่")
-    } else if(args = "ทำนาย") {
-      message.channel.send("ทำนายสิ่งที่ถาม")
-      message.channel.send("วิธีใช้ : คำสั่ง + คำถาม")
-      message.channel.send("อาร์กิวเมนต์ : ใช่")
-    } else if(args = "มีม") {
-      message.channel.send("แสดงมีม")
-      message.channel.send("วิธีใช้ : พิมพ์คำสั่งได้เลย!")
-      message.channel.send("อาร์กิวเมนต์ : ไม่")
-    } else if(args = "ดวง") {
-      message.channel.send("ดวงผู้ใช้")
-      message.channel.send("วิธีใช้ : พิมพ์คำสั่งได้เลย!")
-      message.channel.send("อาร์กิวเมนต์ : ไม่")
-    } else if(args = "อวาตาร") {
-      message.channel.send("แสดงอวาตารผู้ใช้")
-      message.channel.send("วิธีใช้ : พิมพ์คำสั่งได้เลย! / คำสั่ง + ผู้ใช้")
-      message.channel.send("อาร์กิวเมนต์ : ใช่")
-    } else if(args = "เซอร์เวอร์") {
-      message.channel.send("ข้อมูลเซอร์เวอร์")
-      message.channel.send("วิธีใช้ : พิมพ์คำสั่งได้เลย!")
-      message.channel.send("อาร์กิวเมนต์ : ไม่")
-    } else if(args = "เลเวล") {
-      message.channel.send("แสดงเลเวล")
-      message.channel.send("วิธีใช้ : พิมพ์คำสั่งได้เลย! / คำสั่ง + ผู้ใช้")
-      message.channel.send("อาร์กิวเมนต์ : ไม่")
-    } else if(args = "อันดับ") {
-      message.channel.send("เแสดงเลเวลผู้ใช้")
-      message.channel.send("วิธีใช้ : พิมพ์คำสั่งได้เลย!")
-      message.channel.send("อาร์กิวเมนต์ : ไม่")
-    } else if(args = "ลบ") {
-      message.channel.send("ลบข้อความ")
-      message.channel.send("วิธีใช้ : คำสั่ง + จำนวน")
-      message.channel.send("อาร์กิวเมนต์ : ใช")
-    } else if(args = "ระเบิด") {
-      message.channel.send("ลบทุกข้อความในช่อง")
-      message.channel.send("วิธีใช้ : พิมพ์คำสั่งได้เลย!")
-      message.channel.send("อาร์กิวเมนต์ : ไม่")
+      if(args[0]) {
+        let command = args[0];
+
+        if(client.commands.has(command)) {
+            
+            command = client.commands.get(command);
+            var embed = new MessageEmbed()
+            .setAuthor(`${command.name} Command`)
+            .setDescription(`
+            - **ชื่อคำสั่ง:** __${command.name || "ไม่มีชื่อคำสั่ง"}__
+            - **คำอธิบาย:** __${command.description || "ไม่มีคำบรรยาย"}__
+            - **ชื่อคำสั่งอื่น ๆ:** __${command.aliases || "ไม่มีชื่อคำสั่งอื่น ๆ"}__
+            - **คูลดาวน์:** __${command.cooldown || "ไม่มีการคูลดาวน์"}__
+            - **วิธีใช้:** __${command.usage || "พิมพ์คำสั่งได้เลย"}__
+
+            `)
+            .setColor('BLURPLE')
+
+        message.channel.send(embed);
+    }}
+}
     }
-}
-}
+

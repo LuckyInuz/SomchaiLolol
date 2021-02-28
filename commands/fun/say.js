@@ -1,8 +1,9 @@
 module.exports = {
     name: 'พูด',
     aliases: ['พด'],
-    description: 'ดูคำสั่งทั้งหมด',
-    execute: async(message, args) => {
+    description: 'พูดตาม',
+    usage: "[คำพูด]",
+    execute: async(client, message, args) => {
         const { MessageEmbed } = require('discord.js')
         if(!message.member.hasPermission("MANAGE_MESSAGES")) { 
             message.channel.send("คุณต้องได้รับอนุญาติในการจัดการข้อความ")

@@ -1,8 +1,8 @@
 module.exports = {
     name: 'สัปดาห์',
     aliases: ['อาทิตย์', 'ปจส', 'ปจอ'],
-    description: 'ดูคำสั่งทั้งหมด',
-    execute: async(message) => {
+    description: 'ได้รับเงินประจำสัปดาห์',
+    execute: async(client, message) => {
         let db = require('quick.db')
         var member = message.author;
         function convertMS( milliseconds ) {

@@ -4,8 +4,8 @@ const url = 'https://www.reddit.com/r/meme/hot/.json?limit=100'
 
 module.exports = {
     name: 'มีม',
-    description: 'sends meme',
-    execute(message, args) {
+    description: 'ส่งมีม',
+    execute(client, message, args) {
 
         https.get(url, (result) => {
             var body = ''

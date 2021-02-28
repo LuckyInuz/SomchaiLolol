@@ -1,8 +1,8 @@
 module.exports = {
     name: 'เดือน',
     aliases: ['ปจด'],
-    description: 'ดูคำสั่งทั้งหมด',
-    execute: async(message) => {
+    description: 'ได้รับเงินประจำเดือน',
+    execute: async(client, message) => {
         var member = message.author;
         //Convert ms https://gist.github.com/Erichain/6d2c2bf16fe01edfcffa
         //Cooldowns code thanks to https://support.glitch.com/u/Callum-OKane

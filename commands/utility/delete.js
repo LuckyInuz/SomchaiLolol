@@ -1,7 +1,8 @@
 module.exports = {
 	name: 'ลบ',
-	description: 'Prune up to 99 messages.',
-	execute(message, args) {
+	description: 'ลบข้อความ 1-99 ข้อความ',
+	usage: "[จำนวนข้อความที่ต้องการลบ]",
+	execute(client, message, args) {
 		const amount = parseInt(args[0]) + 1;
 
 		if (isNaN(amount)) {

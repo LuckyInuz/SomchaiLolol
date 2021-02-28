@@ -1,8 +1,9 @@
 module.exports = {
 	name: 'แบน',
-	description: 'Banning people',
+	description: 'แบนผู้ใช้',
+  usage: "[ผู้ใช้]",
 	cooldown: 20,
-	execute: async(message, args) => {
+	execute: async(client, message, args) => {
     if(!message.member.hasPermission("BAN_MEMBERS")) {
         message.channel.send("คุณไม่มีสิทธิในการแบน!")
     }

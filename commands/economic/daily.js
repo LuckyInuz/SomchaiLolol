@@ -1,8 +1,8 @@
 module.exports = {
     name: 'วัน',
     aliases: ['ปจว'],
-    description: 'ดูคำสั่งทั้งหมด',
-    execute: async(message) => {
+    description: 'ได้รับเงินประจำวัน',
+    execute: async(client, message) => {
         var member = message.author;
         function convertMS( milliseconds ) {
             var day, hour, minute, seconds;

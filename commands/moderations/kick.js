@@ -1,8 +1,9 @@
 module.exports = {
 	name: 'เตะ',
-	description: 'Kick cool people',
+  description: 'เตะผู้ใช้',
+  usage: "[ผู้ใช้]",
 	cooldown: 20,
-	execute: async(message, args) => {
+	execute: async(client, message, args) => {
     if(!message.member.hasPermission("KICK_MEMBERS")) {
         message.channel.send("คุณไม่มีสิทธิในการเตะ!")
     }

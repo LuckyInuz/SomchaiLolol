@@ -1,8 +1,8 @@
 module.exports = {
 	name: 'ระเบิด',
     aliases: ['เคลียร์ห้อง'],
-	description: 'Prune up to 99 messages.',
-	execute: async(message, args) => {
+	description: 'ลบข้อความทุกข้อความ (เก่ากว่า 14 วันลบไม่ได้)',
+	execute: async(client, message, args) => {
 		if(!message.member.hasPermission("ADMINISTRATOR")) {
 			message.channel.send("คุณไม่มีสิทธิ!")
 		}

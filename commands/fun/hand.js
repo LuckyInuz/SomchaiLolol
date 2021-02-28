@@ -1,8 +1,9 @@
 module.exports = {
     name: 'หล่อ',
     aliases: ['หล'],
-    description: 'ดูคำสั่งทั้งหมด',
-    execute(message, args) {
+    description: 'คำนวณค่าความหล่อ',
+    usage: "<ผู้ใช้>",
+    execute(client, message, args) {
 
         const { MessageEmbed } = require("discord.js")
 

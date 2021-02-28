@@ -1,8 +1,9 @@
 module.exports = {
 name: 'ทำนาย',
 aliases: ['ทน'],
-description: 'ดูคำสั่งทั้งหมด',
-execute(message, args) {
+description: 'ทำนายสิ่งที่คุณถาม',
+usage: "[คำถาม]",
+execute(client, message, args) {
 
     function RANDOM() {
         let banswer = [

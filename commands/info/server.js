@@ -3,7 +3,9 @@ const { MessageEmbed } = require('discord.js')
 module.exports = {
     name: 'เซอร์เวอร์',
     args: false,
-    execute: async(message) => {
+    aliases: ['เซิฟ', 'เซิฟเวอร์', 'ซ', 'ซว'],
+    description: "แสดงข้อมูลเซอร์เวอร์",
+    execute: async(client, message) => {
         let verify = ["None", "Low", "Medium", "High", "Highest"];
         let region = {
             "brazil": ":flag_br: Brazil",

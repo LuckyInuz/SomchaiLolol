@@ -2,7 +2,9 @@ const db = require('quick.db')
 module.exports = {
     name: 'เลเวล',
     aliases: ['ลว', 'เวล', 'ล', 'เว'],
-    execute: async(message, args) => {
+    description: "เช็คเลเวลของผู้ใช้",
+    usage: "<ผู้ใช้>",
+    execute: async(client, message, args) => {
         var member = message.mentions.users.first() || message.author;
         var xp = db.fetch(`xp_${member.id}_${message.guild.id}`)
         var lv = db.fetch(`lv_${member.id}_${message.guild.id}`)

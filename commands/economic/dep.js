@@ -1,8 +1,10 @@
 const db = require('quick.db')
 module.exports = {
     name: 'ฝาก',
+    description: 'ฝากเงินเข้าธนาคาร',
     aliases: ['ฝ', 'ฝากเงิน'],
-    execute: async(message, args) => {
+    usage: "[จำนวนเงิน]",
+    execute: async(client, message, args) => {
         var member = message.author;
         var bal = db.fetch(`bal_${member.id}_${message.guild.id}`)
         if (bal === null) bal = 0

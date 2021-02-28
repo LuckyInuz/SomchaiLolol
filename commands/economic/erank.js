@@ -3,8 +3,9 @@ const client = new Discord.Client()
 const db = require('quick.db')
 module.exports = {
     name: 'อันดับเงิน',
+    description: 'แสดงผู้ที่เงินเยอะที่สุด',
     aliases: ['อดง', 'อันดับง', 'อันง', 'อันดง'],
-    execute: async(message) => {
+    execute: async(client, message) => {
         let money = db.all().filter(data => data.ID.startsWith(`bal`)).sort((a, b) => b.data - a.data)
         money.length = 10;
         var finalLb = "";
