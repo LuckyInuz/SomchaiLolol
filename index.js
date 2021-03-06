@@ -6,6 +6,19 @@ client.commands = new Discord.Collection();
 const db = require('quick.db');
 const commandFolders = fs.readdirSync('./commands');
 let prefix = process.env.PREFIX
+const DisTube = require('distube')
+client.distube = new DisTube(client, { searchSongs: false, emitNewSongOnly: true });
+client.distube
+    .on("playSong", (message, queue, song) => message.channel.send(
+        `กำลังเล่น \`${song.name}\` - \`${song.formattedDuration}\`\nขอโดย : ${song.user}`
+	))
+	.on("addSong", (message, queue, song) => message.channel.send(
+        `เพิ่ม ${song.name} - \`${song.formattedDuration}\` ไปที่คิวโดย ${song.user}`
+    ))
+	.on("error", (message, err) => message.channel.send(
+		"An error encountered: " + err
+	));
+
 
 for (const folder of commandFolders) {
 	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
@@ -89,11 +102,23 @@ client.on('message', message => {
 		console.error(error);
 		message.channel.send("มีการผิดพลาด!");
 	}
-
+	
 	var member = message.mentions.users.first() || message.author;
-	db.fetch(`warn_${member.id}_${message.guild.id}`)
-db.fetch(`chat_${member.id}_${message.guild.id}`)
-db.fetch(`xp_${member.id}_${message.guild.id}`)
+
+	var xp = db.fetch(`xp_${member.id}_${message.guild.id}`)
+	var lv = db.fetch(`lv_${member.id}_${message.guild.id}`)
+	var chat = db.fetch(`chat_${member.id}_${message.guild.id}`)
+	var lvexp = db.fetch(`lvexp_${member.id}_${message.guild.id}`)
+	var lvup = 50;
+
+
+db.add(`lvexp_${member.id}_${message.guild.id}`, 100)
+if(lv === null) lv = 0
+if(xp === lvexp) {
+	db.add(`lv_${member.id}_${message.guild.id}`, 1)
+	db.add(`lvexp_${member.id}_${message.guild.id}`, lvup)
+}
+
 	
 	if(message.content) {
 		db.add(`xp_${member.id}_${message.guild.id}`, 1)
