@@ -1,32 +1,19 @@
-const db = require('quick.db')
+const Level = require('discord-xp')
 module.exports = {
     name: 'เลเวล',
     aliases: ['ลว', 'เวล', 'ล', 'เว'],
     description: "เช็คเลเวลของผู้ใช้",
     usage: "<ผู้ใช้>",
-    execute: async(client, message, args) => {
-        var member = message.mentions.users.first() || message.author;
-        var xp = db.fetch(`xp_${member.id}_${message.guild.id}`)
-        var lv = db.fetch(`lv_${member.id}_${message.guild.id}`)
-        var chat = db.fetch(`chat_${member.id}_${message.guild.id}`)
-        var lvexp = db.fetch(`lvexp_${member.id}_${message.guild.id}`)
-        var lvup = 50;
+    execute: async(client, message) => {
+        const user = await Level.fetch(message.author.id, message.guild.id)
 
-
-	db.add(`lvexp_${member.id}_${message.guild.id}`, 100)
-    if(lv === null) lv = 0
-	if(xp === lvexp) {
-		db.add(`lv_${member.id}_${message.guild.id}`, 1)
-		db.add(`lvexp_${member.id}_${message.guild.id}`, lvup)
-	}
         const { MessageEmbed } = require('discord.js')
         const embed = new MessageEmbed()
-        embed.setTitle(`${member.username} levels`)
+        embed.setTitle(`${message.author.username} levels`)
         embed.setColor("GREEN")
-        embed.setThumbnail(member.avatarURL())
-        embed.addField(`❇ประสบการณ์`, `${xp}`, true)
-        embed.addField(`⬆เลเวล`, `${lv}`, true)
-        embed.addField(`💬ข้อความที่ส่ง`, `${chat}`, true)
+        embed.setThumbnail(message.author.avatarURL())
+        embed.addField(`❇เลเวล`, `${user.level}`, true)
+        embed.addField(`◎ประสบการณ์`, `${user.xp}`, true)
         message.channel.send(embed)
     }
 }

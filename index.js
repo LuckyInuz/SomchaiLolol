@@ -3,22 +3,13 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const client = new Discord.Client()
 client.commands = new Discord.Collection();
-const db = require('quick.db');
 const commandFolders = fs.readdirSync('./commands');
 let prefix = process.env.PREFIX
-const DisTube = require('distube')
-client.distube = new DisTube(client, { searchSongs: false, emitNewSongOnly: true });
-client.distube
-    .on("playSong", (message, queue, song) => message.channel.send(
-        `กำลังเล่น \`${song.name}\` - \`${song.formattedDuration}\`\nขอโดย : ${song.user}`
-	))
-	.on("addSong", (message, queue, song) => message.channel.send(
-        `เพิ่ม ${song.name} - \`${song.formattedDuration}\` ไปที่คิวโดย ${song.user}`
-    ))
-	.on("error", (message, err) => message.channel.send(
-		"An error encountered: " + err
-	));
-
+const Level = require('discord-xp')
+Level.setURL("mongodb+srv://Somchai:SQA8bahqZ1C3C1Pq@somchai-cluster.3rerz.mongodb.net/test")
+const mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://Somchai:SQA8bahqZ1C3C1Pq@somchai-cluster.3rerz.mongodb.net/test', { useNewUrlParser: true, useUnifiedTopology: true, })
+mongoose.set('useFindAndModify', false);
 
 for (const folder of commandFolders) {
 	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
@@ -27,8 +18,6 @@ for (const folder of commandFolders) {
 		client.commands.set(command.name, command);
 	}
 }
-
-
 const cooldowns = new Discord.Collection();
 client.once('ready', () => {
 	const activities_list = [
@@ -44,11 +33,24 @@ client.once('ready', () => {
     }, 3000); // Runs this every 10 seconds.
 });
 
-client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+client.on('message', async message => {
+	
+client.snipe = new Discord.Collection()
+	if (message.author.bot || !message.guild) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
+
+	const randomXp = Math.trunc(Math.random() * 10) - 1;
+	const hasLevelUp = await Level.appendXp(message.author.id, message.guild.id, randomXp)
+	function RandomMessage() {
+		let msgr = ['That\'s awesome!', 'Keep going!', 'How nice!', 'Very cool!', 'You are chatting experts!']
+		return msgr[Math.floor(Math.random() * msgr.length)]
+	}
+	if(hasLevelUp) {
+		const user = await Level.fetch(message.author.id, message.guild.id)
+		message.channel.send(`<@${message.author.id}> has now level up to ${user.level}!` + RandomMessage())
+	}
 
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
@@ -56,26 +58,8 @@ client.on('message', message => {
 	if (!command) return;
 
 	if (command.guildOnly && message.channel.type === 'dm') {
-		return message.reply('I can\'t execute that command inside DMs!');
+		return message.reply('ไม่สามารถสั่งคำสั่งภายใน Direct Message ได้');
 	}
-
-	if (command.permissions) {
-		const authorPerms = message.channel.permissionsFor(message.author);
-		if (!authorPerms || !authorPerms.has(command.permissions)) {
-			return message.reply('You can not do this!');
-		}
-	}
-
-	if (command.args && !args.length) {
-		let reply = `You didn't provide any arguments, ${message.author}!`;
-
-		if (command.usage) {
-			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
-		}
-
-		return message.channel.send(reply);
-	}
-
 	if (!cooldowns.has(command.name)) {
 		cooldowns.set(command.name, new Discord.Collection());
 	}
@@ -89,7 +73,7 @@ client.on('message', message => {
 
 		if (now < expirationTime) {
 			const timeLeft = (expirationTime - now) / 1000;
-			return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
+			return message.reply(`โปรดรออีก ${timeLeft.toFixed(1)} วินาทีก่อนจะใช้คำสั่ง \`${command.name}\``);
 		}
 	}
 
@@ -103,32 +87,6 @@ client.on('message', message => {
 		message.channel.send("มีการผิดพลาด!");
 	}
 	
-	var member = message.mentions.users.first() || message.author;
-
-	var xp = db.fetch(`xp_${member.id}_${message.guild.id}`)
-	var lv = db.fetch(`lv_${member.id}_${message.guild.id}`)
-	var chat = db.fetch(`chat_${member.id}_${message.guild.id}`)
-	var lvexp = db.fetch(`lvexp_${member.id}_${message.guild.id}`)
-	var lvup = 50;
-
-
-db.add(`lvexp_${member.id}_${message.guild.id}`, 100)
-if(lv === null) lv = 0
-if(xp === lvexp) {
-	db.add(`lv_${member.id}_${message.guild.id}`, 1)
-	db.add(`lvexp_${member.id}_${message.guild.id}`, lvup)
-}
-
-	
-	if(message.content) {
-		db.add(`xp_${member.id}_${message.guild.id}`, 1)
-		db.add(`chat_${member.id}_${message.guild.id}`, 1)
-	} else if(!message.content) {
-		return;
-	} else if(message.author.bot){ 
-		return;
-	}
-
 	
 });
 
