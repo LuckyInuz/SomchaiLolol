@@ -3,6 +3,7 @@ module.exports = {
     aliases: ['โด'],
     description: 'ก็รู้ ๆ กันอ่ะนะ',
     execute: async(client, message, args) => {
+if(!message.channel.nsfw) return;
         const Discord = require("discord.js");
 const NSFW = require("discord-nsfw");
 const nsfw = new NSFW();
