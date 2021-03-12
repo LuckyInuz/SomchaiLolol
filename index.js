@@ -10,6 +10,32 @@ Level.setURL("mongodb+srv://Somchai:SQA8bahqZ1C3C1Pq@somchai-cluster.3rerz.mongo
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://Somchai:SQA8bahqZ1C3C1Pq@somchai-cluster.3rerz.mongodb.net/test', { useNewUrlParser: true, useUnifiedTopology: true, })
 mongoose.set('useFindAndModify', false);
+const AntiSpam = require('discord-anti-spam');
+const antiSpam = new AntiSpam({
+	warnThreshold: 3, // Amount of messages sent in a row that will cause a warning.
+	muteThreshold: 4, // Amount of messages sent in a row that will cause a mute
+	kickThreshold: 7, // Amount of messages sent in a row that will cause a kick.
+	banThreshold: 7, // Amount of messages sent in a row that will cause a ban.
+	maxInterval: 2000, // Amount of time (in milliseconds) in which messages are considered spam.
+	warnMessage: '{@user}, หยุดสแปมครับ', // Message that will be sent in chat upon warning a user.
+	kickMessage: '**{user_tag}** โดนเตะเพราะสแปม', // Message that will be sent in chat upon kicking a user.
+	muteMessage: '**{user_tag}** โดนมิวต์เพราะสแปม',// Message that will be sent in chat upon muting a user.
+	banMessage: '**{user_tag}** โดนแบนเพราะสแปม', // Message that will be sent in chat upon banning a user.
+	maxDuplicatesWarning: 7, // Amount of duplicate messages that trigger a warning.
+	maxDuplicatesKick: 10, // Amount of duplicate messages that trigger a warning.
+	maxDuplicatesBan: 12, // Amount of duplicate messages that trigger a warning.
+	exemptPermissions: [ 'ADMINISTRATOR'], // Bypass users with any of these permissions.
+	ignoreBots: false, // Ignore bot messages.
+	verbose: true, // Extended Logs from module.
+	ignoredUsers: [], // Array of User IDs that get ignored.
+	muteRoleName: "Muted", // Name of the role that will be given to muted users!
+	removeMessages: true // If the bot should remove all the spam messages when taking action on a user!
+	// And many more options... See the documentation.
+});
+
+const PasteClient = require("pastebin-api").default;
+
+const paste = new PasteClient("eI-wkXBK2-y7xBAXVxEXvCMDRNPFTYUw");
 
 for (const folder of commandFolders) {
 	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
@@ -34,7 +60,7 @@ client.once('ready', () => {
 });
 
 client.on('message', async message => {
-	
+	antiSpam.message(message);
 client.snipe = new Discord.Collection()
 	if (message.author.bot || !message.guild) return;
 
@@ -84,7 +110,14 @@ client.snipe = new Discord.Collection()
 		command.execute(client, message, args);
 	} catch (error) {
 		console.error(error);
-		message.channel.send("มีการผิดพลาด!");
+const url = await paste.createPaste({
+	code: error,
+	expireDate: "N",
+	format: "javascript",
+	name: "somchai-error-logs",
+	publicity: 0,
+  });
+		message.channel.send("มีการผิดพลาด!, ดู error ได้ที่" + url);
 	}
 	
 	
