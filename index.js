@@ -60,6 +60,7 @@ client.once('ready', () => {
 });
 
 client.on('message', async message => {
+if(!message.content.startsWith(prefix)) return;
 	antiSpam.message(message);
 client.snipe = new Discord.Collection()
 	if (message.author.bot || !message.guild) return;
