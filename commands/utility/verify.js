@@ -6,12 +6,12 @@ module.exports = {
 		let myRole = message.guild.roles.cache.find(role => role.name === "🟢สมาชิก");
 let advert = message.guild.roles.cache.find(role => role.name === "◀️ติดตามการโฆษณา");
         if(message.member.roles.cache.find(r => r.name === "🟢สมาชิก")) {
-            message.channel.send("คุณมีบทบาทนี้แล้ว")
+            return;
         } else if(!message.member.roles.cache.find(r => r.name === "🟢สมาชิก")) {
             message.member.roles.add(myRole)
 message.member.roles.add(advert)
 message.delete()
-    }
+        }
 
 	},
 };
