@@ -8,15 +8,8 @@ Level.setURL("mongodb+srv://Somchai:SQA8bahqZ1C3C1Pq@somchai-cluster.3rerz.mongo
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://Somchai:SQA8bahqZ1C3C1Pq@somchai-cluster.3rerz.mongodb.net/test', { useNewUrlParser: true, useUnifiedTopology: true, })
 mongoose.set('useFindAndModify', false);
-const prompt = require('prompt-sync')()
-var name = prompt('What is your name? ')
-prompt("Hello " + name + "!")
-prompt("Now you are want to make bot, Right?")
-let token = prompt('Insert token here! : ')
-let prefix = prompt('Insert prefix here! : ') 
-
 const PasteClient = require("pastebin-api").default;
-
+let prefix = ['sm!', "สมชาย"]
 const paste = new PasteClient("eI-wkXBK2-y7xBAXVxEXvCMDRNPFTYUw");
 
 for (const folder of commandFolders) {
@@ -109,4 +102,4 @@ const url = await paste.createPaste({
 	
 });
 
-client.login(token);
+client.login(process.env.TOKEN);
