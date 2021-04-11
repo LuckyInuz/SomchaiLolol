@@ -9,7 +9,8 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://Somchai:SQA8bahqZ1C3C1Pq@somchai-cluster.3rerz.mongodb.net/test', { useNewUrlParser: true, useUnifiedTopology: true, })
 mongoose.set('useFindAndModify', false);
 const PasteClient = require("pastebin-api").default;
-let prefix = ['sm!', "สมชาย"]
+let prefix = "sm!"
+let prefix2 = "สมชาย"
 const paste = new PasteClient("eI-wkXBK2-y7xBAXVxEXvCMDRNPFTYUw");
 
 for (const folder of commandFolders) {
@@ -38,7 +39,7 @@ client.on('message', async message => {
 	if(message.author.id === "601039345603969044") {
 		message.delete()
 	}
-if(!message.content.startsWith(prefix)) return;
+if(!message.content.startsWith(prefix || prefix2)) return;
 	if (message.author.bot || !message.guild) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
