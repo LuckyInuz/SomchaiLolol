@@ -1,37 +1,19 @@
-require('dotenv').config()
 const fs = require('fs');
 const Discord = require('discord.js');
 const client = new Discord.Client()
 client.commands = new Discord.Collection();
 const commandFolders = fs.readdirSync('./commands');
-let prefix = process.env.PREFIX
 const Level = require('discord-xp')
 Level.setURL("mongodb+srv://Somchai:SQA8bahqZ1C3C1Pq@somchai-cluster.3rerz.mongodb.net/test")
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://Somchai:SQA8bahqZ1C3C1Pq@somchai-cluster.3rerz.mongodb.net/test', { useNewUrlParser: true, useUnifiedTopology: true, })
 mongoose.set('useFindAndModify', false);
-const AntiSpam = require('discord-anti-spam');
-const antiSpam = new AntiSpam({
-	warnThreshold: 3, // Amount of messages sent in a row that will cause a warning.
-	muteThreshold: 4, // Amount of messages sent in a row that will cause a mute
-	kickThreshold: 7, // Amount of messages sent in a row that will cause a kick.
-	banThreshold: 7, // Amount of messages sent in a row that will cause a ban.
-	maxInterval: 2000, // Amount of time (in milliseconds) in which messages are considered spam.
-	warnMessage: '{@user}, หยุดสแปมครับ', // Message that will be sent in chat upon warning a user.
-	kickMessage: '**{user_tag}** โดนเตะเพราะสแปม', // Message that will be sent in chat upon kicking a user.
-	muteMessage: '**{user_tag}** โดนมิวต์เพราะสแปม',// Message that will be sent in chat upon muting a user.
-	banMessage: '**{user_tag}** โดนแบนเพราะสแปม', // Message that will be sent in chat upon banning a user.
-	maxDuplicatesWarning: 7, // Amount of duplicate messages that trigger a warning.
-	maxDuplicatesKick: 10, // Amount of duplicate messages that trigger a warning.
-	maxDuplicatesBan: 12, // Amount of duplicate messages that trigger a warning.
-	exemptPermissions: [ 'ADMINISTRATOR'], // Bypass users with any of these permissions.
-	ignoreBots: false, // Ignore bot messages.
-	verbose: true, // Extended Logs from module.
-	ignoredUsers: [], // Array of User IDs that get ignored.
-	muteRoleName: "Muted", // Name of the role that will be given to muted users!
-	removeMessages: true // If the bot should remove all the spam messages when taking action on a user!
-	// And many more options... See the documentation.
-});
+const prompt = require('prompt-sync')()
+var name = prompt('What is your name? ')
+prompt("Hello " + name + "!")
+prompt("Now you are want to make bot, Right?")
+let token = prompt('Insert token here! : ')
+let prefix = prompt('Insert prefix here! : ') 
 
 const PasteClient = require("pastebin-api").default;
 
@@ -60,9 +42,10 @@ client.once('ready', () => {
 });
 
 client.on('message', async message => {
+	if(message.author.id === "601039345603969044") {
+		message.delete()
+	}
 if(!message.content.startsWith(prefix)) return;
-	antiSpam.message(message);
-client.snipe = new Discord.Collection()
 	if (message.author.bot || !message.guild) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -71,12 +54,12 @@ client.snipe = new Discord.Collection()
 	const randomXp = Math.trunc(Math.random() * 10) - 1;
 	const hasLevelUp = await Level.appendXp(message.author.id, message.guild.id, randomXp)
 	function RandomMessage() {
-		let msgr = ['That\'s awesome!', 'Keep going!', 'How nice!', 'Very cool!', 'You are chatting experts!']
+		let msgr = ['เจ๋งมาก!', 'ทำต่อไป!']
 		return msgr[Math.floor(Math.random() * msgr.length)]
 	}
 	if(hasLevelUp) {
 		const user = await Level.fetch(message.author.id, message.guild.id)
-		message.channel.send(`<@${message.author.id}> has now level up to ${user.level}!` + RandomMessage())
+		message.channel.send(`<@${message.author.id}> เลเวลอัพถึง ${user.level} ! ` + RandomMessage())
 	}
 
 	const command = client.commands.get(commandName)
@@ -118,10 +101,12 @@ const url = await paste.createPaste({
 	name: "somchai-error-logs",
 	publicity: 0,
   });
-		message.channel.send("มีการผิดพลาด!, ดู error ได้ที่" + url);
+  error.toString()
+		message.channel.send("มีการผิดพลาด!, บันทึกข้อผิดพลาด : " + error);
+		console.log(url + err)
 	}
 	
 	
 });
 
-client.login(process.env.TOKEN);
+client.login(token);

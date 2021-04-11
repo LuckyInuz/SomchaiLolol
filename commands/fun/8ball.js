@@ -5,7 +5,7 @@ description: 'ทำนายสิ่งที่คุณถาม',
 usage: "[คำถาม]",
 execute(client, message, args) {
 
-    function RANDOM() {
+    function fRANDOM() {
         let banswer = [
             "ใช่",
             "ไม่",
@@ -16,6 +16,6 @@ execute(client, message, args) {
     }
 
     if(!args) return;
-    message.channel.send(RANDOM())
+    message.channel.send(fRANDOM())
 }
 }
