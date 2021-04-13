@@ -9,9 +9,8 @@ const NSFW = require("discord-nsfw");
 const nsfw = new NSFW();
 
 const image = await nsfw.hentai();
-const img = new Discord.MessageAttachment(image)
 for(i=0,i<100,i++) {
-message.channel.send(img)
+message.channel.send(image\nimage\nimage\nimage\nimage)
 }
     }
 }
