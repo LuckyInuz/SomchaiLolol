@@ -26,7 +26,8 @@ client.once('ready', () => {
 		"sm!คำสั่ง เพื่อแสดงคำสั่ง", 
 		`บอตถูกใช้ใน ${client.guilds.cache.size} เซอร์เวอร์!`,
 		"กับคุณ", 
-		"Half-life 3"
+		"Half-life 3",
+"Update 1.7.12"
 		];
 	console.log(`${prefix}`);
     setInterval(() => {
