@@ -10,7 +10,7 @@ const nsfw = new NSFW();
 
 const image = await nsfw.neko();
 const embed = new Discord.MessageEmbed()
-    .setTitle(`เอารูปที่คุณชอบ ๆ ไป`)
+    .setTitle(`ตามสบาย`)
     .setColor("GREEN")
     .setImage(image);
 message.channel.send(embed);

@@ -31,10 +31,10 @@ let db = require('quick.db')
 	if (cooldown !== null && timeout - (Date.now() - cooldown) > 0) {
 		const time = (timeout - (Date.now() - cooldown));
         var durations =  convertMS(time)
-		message.channel.send(`คุณต้องรออีก ${durations.day}วัน ${durations.hour}ชม. ${durations.minute}น. ${durations.seconds}วิ. ก่อนใช่คำสั่งอีกครั้ง!`);
+		message.channel.send(`อย่ารีบสิ! เหลืออีก ${durations.day}วัน ${durations.hour}ชม. ${durations.minute}น. ${durations.seconds}วิ. เอง!`);
 	} else {
         db.add(`bal_${member.id}_${message.guild.id}`, 15000)
-        message.channel.send("คุณเยี่ยมมาก, เอา 15000 บาทคุณไป")
+        message.channel.send("นายเยี่ยมมาก, เอา 15000 บาทนายไป")
         db.set(`cooldown_month_${message.guild.id}_${message.author.id}`, Date.now());
     }
 }

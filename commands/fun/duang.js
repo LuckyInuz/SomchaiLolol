@@ -42,7 +42,7 @@ module.exports = {
 	if (cooldown !== null && timeout - (Date.now() - cooldown) > 0) {
 		const time = (timeout - (Date.now() - cooldown));
 		var durations =  convertMS(time)
-		message.channel.send(`คุณต้องรออีก ${durations.day}วัน ${durations.hour}ชม. ${durations.minute}น. ${durations.seconds}วิ. ก่อนใช่คำสั่งอีกครั้ง!`);
+		message.channel.send(`ดวงหน่ะ ไม่ได้ให้สั่งทุกชั่วโมงหรอกนะ รออีก ${durations.day}วัน ${durations.hour}ชม. ${durations.minute}น. ${durations.seconds}วิ. ก่อนใช่คำสั่งอีกครั้ง`);
 	} else {
         let embed = new MessageEmbed()
         .setAuthor(message.author.tag, message.author.avatarURL())

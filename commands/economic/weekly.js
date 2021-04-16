@@ -30,10 +30,10 @@ module.exports = {
 	if (cooldown !== null && timeout - (Date.now() - cooldown) > 0) {
         const time = (timeout - (Date.now() - cooldown));
         var durations =  convertMS(time)
-		message.channel.send(`คุณต้องรออีก ${durations.day}วัน ${durations.hour}ชม. ${durations.minute}น. ${durations.seconds}วิ. ก่อนใช่คำสั่งอีกครั้ง!`);
+		message.channel.send(`ไม่ต้องรีบ ๆ รออีกแค่ ${durations.day}วัน ${durations.hour}ชม. ${durations.minute}น. ${durations.seconds}วิ. วันเองหน่า!`);
 	} else {
         db.add(`bal_${member.id}_${message.guild.id}`, 2500)
-        message.channel.send("คุณเยี่ยมมาก, เอา 2500 บาทคุณไป")
+        message.channel.send("นายเยี่ยมมาก, เอา 2500 บาทนายไป")
         db.set(`cooldown_week_${message.guild.id}_${message.author.id}`, Date.now());
     }
 }

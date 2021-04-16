@@ -16,11 +16,11 @@ module.exports = {
         if(args === NaN) return;
 
         if (bal < x) {
-            message.channel.send(`คุณต้องมี ${x} บาทถึงจะฝากเงินได้`)
+            message.channel.send(`นายหน่ะ, ต้องมี ${x} บาทก่อนนายถึงจะฝากเงินได้`)
         } else if (bal = x || bal > x) {
             db.subtract(`bal_${member.id}_${message.guild.id}`, args)
             db.add(`bank_${member.id}_${message.guild.id}`, args)
-            message.channel.send(`คุณได้ฝากเงิน ${args} ในธนาคาร, และตอนนี้คุณมีเงิน ${bal} บาทในกระเป๋าตัง และอีก ${bank} บาทในบัญชี`)
+            message.channel.send(`นายได้ฝากเงิน ${args} ไว้ในธนาคาร, และตอนนี้นายมีเงิน ${bal} บาทในกระเป๋าตัง และอีก ${bank} บาทในบัญชี`)
         }
     }
 }

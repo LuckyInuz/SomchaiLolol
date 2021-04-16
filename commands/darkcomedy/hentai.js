@@ -10,7 +10,7 @@ const nsfw = new NSFW();
 
 const image = await nsfw.hentai();
 const embed = new Discord.MessageEmbed()
-    .setTitle(`เอารูปที่คุณชอบ ๆ ไป`)
+    .setTitle(`อย่าดูเยอะนักหล่ะ`)
     .setColor("GREEN")
     .setImage(image);
 message.channel.send(embed);

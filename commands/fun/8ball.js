@@ -10,7 +10,7 @@ execute(client, message, args) {
             "ใช่",
             "ไม่",
             "แน่นอน!",
-            "ไม่ใช่ในชาตินี้"
+            "รอชาติหน้า"
         ]
         return banswer[Math.floor(Math.random() * banswer.length)]
     }
