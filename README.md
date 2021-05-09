@@ -5,6 +5,7 @@
   </a>
   <hr/>
   <h2>Base on Somchai Discord Bot</h2>
+<h2>CURRENT VERSION : 1.7.13</h2>
   <br/>
   <p><b>(1.8) Sneakpeeks : </b></p>
   <br/>
